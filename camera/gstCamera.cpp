@@ -413,7 +413,7 @@ bool gstCamera::buildLaunchStr( gstCameraSrc src )
 	#if NV_TENSORRT_MAJOR > 1 && NV_TENSORRT_MAJOR < 5	// if JetPack 3.1-3.3 (different flip-method)
 		const int flipMethod = 0;					// Xavier (w/TRT5) camera is mounted inverted
 	#else
-		const int flipMethod = 2;
+		const int flipMethod = 0;
 	#endif	
 
 		if( src == GST_SOURCE_NVCAMERA )
