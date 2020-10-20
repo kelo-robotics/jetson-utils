@@ -35,6 +35,7 @@
 #include "logging.h"
 
 #include "NvInfer.h"
+#include <iostream>
 
 
 // constructor
@@ -151,6 +152,11 @@ bool gstCamera::buildLaunchStr()
 		
 		ss << "video/x-raw ! appsink name=mysink";
 	}
+	else if( mOptions.resource.protocol == "v4l2" )
+	{
+		ss << "v4l2src device=" << mOptions.resource.location << " ! ";
+		ss << "video/x-raw, width=(int)" << GetWidth() << ", height=(int)" << GetHeight() << " ! " << "appsink name=mysink";
+	}
 	else
 	{
 		ss << "v4l2src device=" << mOptions.resource.location << " ! ";
@@ -183,6 +189,7 @@ bool gstCamera::buildLaunchStr()
 			ss << "nvjpegdec ! video/x-raw ! ";
 
 		ss << "appsink name=mysink";
+
 	}
 	
 	mLaunchStr = ss.str();
